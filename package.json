@@ -24,9 +24,6 @@
   ],
   "author": "Angela Sofia Osorio - SofiDev (contact@sofidev.top)",
   "license": "MIT",
-  "dependencies": {
-    "isnumber": "^1.0.0"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SofiDevO/sofi-date.git"
