@@ -1,7 +1,7 @@
 # sofi-date
 
 [![npm version](https://img.shields.io/npm/v/sofi-date.svg)](https://www.npmjs.com/package/sofi-date)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 A flexible date formatter for Node.js with support for both international (YYYY-MM-DD) and US (MM/DD/YYYY) formats. Easily format dates in different languages and styles.
 
