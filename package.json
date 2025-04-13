@@ -1,7 +1,7 @@
 {
   "name": "sofi-date",
-  "version": "1.0.0",
-  "description": "Date formater for Node.js",
+  "version": "1.1.0",
+  "description": "Date formatter for Node.js with support for both international (YYYY-MM-DD) and US (MM/DD/YYYY) formats",
   "main": "index.js",
   "scripts": {
     "test": "node test.js",
@@ -9,7 +9,18 @@
   },
   "keywords": [
     "sofidev",
-    "nodejs"
+    "nodejs",
+    "date",
+    "time",
+    "format",
+    "formatter",
+    "international",
+    "US",
+    "YYYY-MM-DD",
+    "MM/DD/YYYY",
+    "locale",
+    "spanish",
+    "english"
   ],
   "author": "Angela Sofia Osorio - SofiDev (contact@sofidev.top)",
   "license": "MIT",
