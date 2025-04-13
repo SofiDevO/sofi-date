@@ -2,6 +2,13 @@
 
 All notable changes to the sofi-date package will be documented in this file.
 
+## [1.1.1] - 2025-04-12
+
+### Added
+- Repository information added to package.json
+- GitHub links for homepage and bug reporting
+- Improved npm package metadata
+
 ## [1.1.0] - 2025-04-12
 
 ### Added

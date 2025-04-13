@@ -26,5 +26,13 @@
   "license": "MIT",
   "dependencies": {
     "isnumber": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SofiDevO/sofi-date.git"
+  },
+  "homepage": "https://github.com/SofiDevO/sofi-date#readme",
+  "bugs": {
+    "url": "https://github.com/SofiDevO/sofi-date/issues"
   }
 }
