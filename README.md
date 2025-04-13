@@ -71,13 +71,9 @@ formateShort("2025-03-17", "en-US"); // "Mar/17/2025"
 ```
 
 ## Support Development ☕
-[![GitHub Sponsors](https://img.shields.io/badge/Sponsor-%E2%9D%A4%EF%B8%8F-ea4aaa?logo=githubsponsors)](https://github.com/sponsors/SofiDevO?o=esb)
-[![Ko-fi](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ff5e5b?logo=kofi)](https://ko-fi.com/sofidev)
+[![GitHub Sponsors](https://img.shields.io/badge/Sponsor-%E2%9D%A4%EF%B8%8F-29036b?logo=githubsponsors)](https://github.com/sponsors/SofiDevO?o=esb)
+[![Ko-fi](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-29036b?logo=kofi)](https://ko-fi.com/sofidev)
 
 ---
 
 **MIT Licensed** | [Full Documentation](https://github.com/SofiDevO/sofi-date)
-
-## License
-
-MIT © [Angela Sofia Osorio - SofiDev](https://github.com/SofiDevO)

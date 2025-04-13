@@ -2,6 +2,13 @@
 
 All notable changes to the sofi-date package will be documented in this file.
 
+## [3.0.1] - 2025-04-12
+
+### Fixed
+- Fixed timezone handling for YYYY-MM-DD date strings
+- Improved date parsing accuracy across different formats
+- All formatting functions now correctly handle timezone conversions
+- Enhanced test coverage with passing test cases
 ## [2.0.1] - 2025-04-12
 
 ### Fixed
