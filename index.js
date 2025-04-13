@@ -40,8 +40,4 @@ function formateShort(date, locale) {
   }
 }
 
-console.log(formateFull("2025-03-17T22:17:15", "es-ES")); // 17 de Marzo de 2025
-console.log(formateFull("2025-03-17T22:17:15", "en-US")); // March 17, 2025
-
-console.log(formateShort("2025-03-17T22:17:15", "es-ES")); // 17/Mar/2025
-console.log(formateShort("2025-03-17T22:17:15", "en-US")); // Mar/17/2025
+module.exports = { formateFull, formateShort };

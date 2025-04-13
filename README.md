@@ -17,12 +17,13 @@ npm install sofi-date
 const { formateFull, formateShort } = require('sofi-date');
 
 // Full date formatting
-console.log(formateFull("2025-03-17T22:17:15", "es-ES")); // 17 de Marzo de 2025
-console.log(formateFull("2025-03-17T22:17:15", "en-US")); // March 17, 2025
+console.log(formateFull("2025-03-17T22:17:15", "es-ES")); // "17 de Marzo de 2025"
+console.log(formateFull("2025-03-17T22:17:15", "en-US")); // "March 17, 2025"
 
 // Short date formatting
-console.log(formateShort("2025-03-17T22:17:15", "es-ES")); // 17/Mar/2025
-console.log(formateShort("2025-03-17T22:17:15", "en-US")); // Mar/17/2025
+console.log(formateShort("2025-03-17T22:17:15", "es-ES")); // "17/Mar/2025"
+console.log(formateShort("2025-03-17T22:17:15", "en-US")); // "Mar/17/2025"
+
 ```
 
 ## Supported Locales
@@ -63,9 +64,9 @@ Formats a date into a short representation with abbreviated month name.
 
 **Returns:**
 - (String): The formatted date string in abbreviated format.
-
 **Examples:**
 ```javascript
+formateShort("2025-03-17", "es-ES"); // "17/Mar/2025"
 formateShort("2025-03-17", "en-US"); // "Mar/17/2025"
 ```
 
@@ -80,4 +81,3 @@ formateShort("2025-03-17", "en-US"); // "Mar/17/2025"
 ## License
 
 MIT © [Angela Sofia Osorio - SofiDev](https://github.com/SofiDevO)
-

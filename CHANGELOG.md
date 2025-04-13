@@ -2,6 +2,14 @@
 
 All notable changes to the sofi-date package will be documented in this file.
 
+## [2.0.1] - 2025-04-12
+
+### Fixed
+- Added proper `module.exports` statement for better CommonJS compatibility
+- Improved README examples to match actual code output
+- Added missing Spanish example for the `formateShort` function
+- Ensured consistent output formatting in documentation examples
+
 ## [2.0.0] - 2025-04-12
 
 ### Breaking Changes

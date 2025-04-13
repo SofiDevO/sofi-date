@@ -1,6 +1,6 @@
 {
   "name": "sofi-date",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Date formatter for Node.js with support for both international (YYYY-MM-DD) and US (MM/DD/YYYY) formats",
   "main": "index.js",
   "scripts": {
