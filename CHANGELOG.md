@@ -2,6 +2,27 @@
 
 All notable changes to the sofi-date package will be documented in this file.
 
+## [2.0.0] - 2025-04-12
+
+### Breaking Changes
+- Complete API refactoring with new function names and parameters
+- Removed deprecated functions: `formatSimple()`, `formatFull()`, `formatUS()`, `formatUSFull()`, `formatWithLocale()`
+- Changed to a more consistent API with locale-based formatting approach
+
+### Added
+- New streamlined API with just two main functions:
+  - `formateFull()` - Formats dates with full month names based on locale
+  - `formateShort()` - Formats dates with abbreviated month names based on locale
+- Comprehensive README.md with installation and usage instructions
+- New STEPS.md file explaining the internal workings of the package
+- Improved JSDoc documentation for better IDE integration
+
+### Improved
+- Enhanced locale support with better handling of Spanish (es-ES) and English (en-US) formats
+- Better capitalization of month names in Spanish locale
+- More consistent date format patterns across locales
+- Optimized code structure for maintainability and performance
+
 ## [1.1.1] - 2025-04-12
 
 ### Added
