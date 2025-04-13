@@ -1,0 +1,19 @@
+{
+  "name": "sofi-date",
+  "version": "1.0.0",
+  "description": "Date formater for Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "sofidev",
+    "nodejs"
+  ],
+  "author": "Angela Sofia Osorio - SofiDev (contact@sofidev.top)",
+  "license": "MIT",
+  "dependencies": {
+    "isnumber": "^1.0.0"
+  }
+}
