@@ -299,7 +299,120 @@ Through this project, we:
 5. Published a package to npm
 6. Set up a GitHub repository for version control
 
-## 8. Next Steps
+## 8. Updating Your Package
+
+When you make improvements or fix bugs in your package, you'll need to update it. Here's how:
+
+### Understanding Semantic Versioning
+
+npm packages follow a version numbering system called "Semantic Versioning" or "SemVer". Each version has three numbers: `MAJOR.MINOR.PATCH` (like 1.0.0):
+
+- **PATCH** (1.0.0 → 1.0.1): Bug fixes that don't change how people use your code
+- **MINOR** (1.0.0 → 1.1.0): New features that don't break existing functionality
+- **MAJOR** (1.0.0 → 2.0.0): Changes that might break existing code using your package
+
+### Updating Your Package
+
+1. **Make your code changes**:
+   - Fix bugs
+   - Add new features
+   - Improve documentation
+
+2. **Update the version number** in `package.json`:
+
+   You can update it manually by editing `package.json`, or use npm's version command:
+   
+   ```bash
+   # For a patch update (bug fix):
+   npm version patch
+   
+   # For a minor update (new feature):
+   npm version minor
+   
+   # For a major update (breaking change):
+   npm version major
+   ```
+   
+   This command will:
+   - Update the version in package.json
+   - Create a git tag for the version
+   - Commit the changes
+
+3. **Test your changes thoroughly**:
+   ```bash
+   npm test
+   ```
+
+4. **Add a CHANGELOG.md file** (if you don't have one yet):
+   
+   ```markdown
+   # Changelog
+   
+   All notable changes to this project will be documented in this file.
+   
+   ## [1.0.1] - 2025-04-15
+   
+   ### Fixed
+   - Fixed timezone handling in date-only strings
+   
+   ### Added
+   - Added new formatting option X
+   ```
+
+5. **Publish the update**:
+   ```bash
+   npm publish
+   ```
+
+6. **Push to GitHub**:
+   ```bash
+   git push
+   git push --tags  # Push the version tags too
+   ```
+
+### Best Practices for Maintaining a Changelog
+
+A good changelog helps users understand what's changed between versions:
+
+1. **Keep a CHANGELOG.md file** in your project's root directory
+2. **Group changes by type**:
+   - `Added` for new features
+   - `Changed` for changes in existing functionality
+   - `Deprecated` for features that will be removed soon
+   - `Removed` for removed features
+   - `Fixed` for bug fixes
+   - `Security` for security fixes
+3. **Use dates** for each release
+4. **Link to issues or pull requests** if you're using GitHub's issue tracker
+5. **Describe changes in plain language** that users can understand
+
+Example:
+
+```markdown
+# Changelog
+
+## [1.1.0] - 2025-05-01
+
+### Added
+- New function `formatCustom()` to allow custom date patterns
+
+### Fixed
+- Bug with leap year calculations (#12)
+
+## [1.0.1] - 2025-04-15
+
+### Fixed
+- Timezone handling in date-only strings
+
+## [1.0.0] - 2025-04-12
+
+### Added
+- Initial release with `formatSimple()` and `formatFull()` functions
+```
+
+By following these steps, you'll maintain a professional package that others can depend on.
+
+## 9. Next Steps
 
 If you want to continue improving this package, you could:
 1. Add more date formatting options
