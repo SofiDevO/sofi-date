@@ -1,5 +1,64 @@
 # Changelog
 
+All notable changes to the `sofi-date` package will be documented in this file.
+
+## [4.0.0] - 2025-04-17
+
+### 🚀 Major Changes
+
+- **Complete rewrite using JavaScript's native date formatting capabilities**
+- **Flexible locale support for any valid locale code** (e.g., 'en', 'es', 'fr', 'de', 'ja', etc.)
+- **Simplified API with consistent parameter ordering** (date, locale, options)
+- **Added multiple format styles** (simple, long, full)
+- **Support for date-only and date-time formatting**
+- **Improved error handling with helpful messages**
+
+### ✨ New Features
+
+- New core `format()` function with flexible options
+- Helper functions for common formatting needs:
+  - `formatDate()` - Format date only
+  - `formatDateTime()` - Format date with time
+  - `formatLong()` - Format with month name
+  - `formatFull()` - Format with weekday and month name
+  - `formatFullDateTime()` - Format date and time with weekday and month name
+- Support for all major locale variants (e.g., 'en-US', 'en-GB', 'es-ES', 'es-MX')
+- Comprehensive documentation and examples
+
+### 💥 Breaking Changes
+
+- **API changes:** Function signatures and parameters have changed
+- **Removed `FORMAT_TYPES` constant** - use locale codes directly
+- **Default locale is now 'en'** instead of locale-specific constants
+
+### 🧰 Migration from v3.x
+
+Replace:
+```javascript
+const { formatSimple, formatUS, FORMAT_TYPES } = require('sofi-date');
+
+formatSimple(date);  // YYYY-MM-DD
+formatUS(date);      // MM/DD/YYYY
+formatWithLocale(date, FORMAT_TYPES.ES, true, 'language');
+```
+
+With:
+```javascript
+const { formatDate, formatDateTime, formatLong } = require('sofi-date');
+
+formatDate(date, 'en');            // MM/DD/YYYY (or locale default)
+formatDate(date, 'es');            // DD/MM/YYYY (or locale default)
+formatDateTime(date, 'es', 'full'); // Full date with time in Spanish
+```
+
+## [3.0.1] - Prior to rewrite
+
+- Original implementation with separate functions for different format types
+- Limited locale support
+- Fixed format styles
+
+# Changelog
+
 All notable changes to the sofi-date package will be documented in this file.
 
 ## [3.0.1] - 2025-04-12

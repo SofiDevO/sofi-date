@@ -1,10 +1,51 @@
 /**
- * Format types for date localization
+ * Date format options
  */
-const FORMAT_TYPES = {
-  ES: 'es',
-  EN: 'en'
+const FORMAT_OPTIONS = {
+  // Date only formats
+  date: {
+    simple: {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    },
+    long: {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    },
+    full: {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    }
+  },
+  // Date and time formats
+  dateTime: {
+    simple: {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    },
+    full: {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    }
+  }
 };
+
+// No need for a locales constant - users can pass locale codes directly
 
 /**
  * Validates and parses a date input
@@ -18,25 +59,13 @@ function validateDate(date) {
   }
 
   let parsedDate;
+  
   if (date instanceof Date) {
     parsedDate = date;
   } else if (typeof date === 'number') {
     parsedDate = new Date(date);
   } else if (typeof date === 'string') {
-    // Check if the string is in YYYY-MM-DD format
-    const isoDateRegex = /^(\d{4})-(\d{2})-(\d{2})$/;
-    const match = date.match(isoDateRegex);
-    
-    if (match) {
-      // If it's in YYYY-MM-DD format, create a date using local time components
-      const year = parseInt(match[1], 10);
-      const month = parseInt(match[2], 10) - 1; // Month is 0-indexed in JavaScript
-      const day = parseInt(match[3], 10);
-      parsedDate = new Date(year, month, day);
-    } else {
-      // For other string formats, use the default Date constructor
-      parsedDate = new Date(date);
-    }
+    parsedDate = new Date(date);
   } else {
     throw new Error(`Invalid date input: ${date}. Must be a Date object, timestamp, or date string.`);
   }
@@ -49,95 +78,107 @@ function validateDate(date) {
 }
 
 /**
- * Formats a date in YYYY-MM-DD format
- * @param {Date|number|string} [date] - Date object, timestamp, or date string (defaults to current date)
- * @returns {string} - Formatted date string in YYYY-MM-DD format
- */
-function formatSimple(date) {
-  const parsedDate = validateDate(date);
-  
-  const year = parsedDate.getFullYear();
-  const month = String(parsedDate.getMonth() + 1).padStart(2, '0');
-  const day = String(parsedDate.getDate()).padStart(2, '0');
-  
-  return `${year}-${month}-${day}`;
-}
-
 /**
- * Formats a date in YYYY-MM-DD HH:mm:ss format
- * @param {Date|number|string} [date] - Date object, timestamp, or date string (defaults to current date)
- * @returns {string} - Formatted date string in YYYY-MM-DD HH:mm:ss format
+ * Format a date according to the specified options
+ * @param {Date|number|string} [date=new Date()] - Date object, timestamp, or date string
+ * @param {string} [locale='en'] - Locale code (e.g., 'en', 'es', 'fr', 'en-US', 'es-MX')
+ * @param {Object} [options={}] - Formatting options
+ * @param {boolean} [options.includeTime=false] - Whether to include time in the output
+ * @param {string} [options.style='simple'] - Format style: 'simple', 'long', or 'full'
+ * @returns {string} - Formatted date string
  */
-function formatFull(date) {
+function format(date = new Date(), locale = 'en', options = {}) {
+  // Set default options
+  const { includeTime = false, style = 'simple' } = options;
+  
+  // Validate and parse the date
   const parsedDate = validateDate(date);
   
-  const datePart = formatSimple(parsedDate);
-  const hours = String(parsedDate.getHours()).padStart(2, '0');
-  const minutes = String(parsedDate.getMinutes()).padStart(2, '0');
-  const seconds = String(parsedDate.getSeconds()).padStart(2, '0');
+  // Determine format options based on parameters
+  const formatType = includeTime ? 'dateTime' : 'date';
   
-  return `${datePart} ${hours}:${minutes}:${seconds}`;
-}
-
-/**
- * Formats a date in MM/DD/YYYY format
- * @param {Date|number|string} [date] - Date object, timestamp, or date string (defaults to current date)
- * @returns {string} - Formatted date string in MM/DD/YYYY format
- */
-function formatUS(date) {
-  const parsedDate = validateDate(date);
+  // Default to 'simple' if the requested style doesn't exist
+  const formatStyle = Object.prototype.hasOwnProperty.call(FORMAT_OPTIONS[formatType], style) 
+    ? style 
+    : 'simple';
+    
+  // Get format options
+  const formatOptions = FORMAT_OPTIONS[formatType][formatStyle];
   
-  const year = parsedDate.getFullYear();
-  const month = String(parsedDate.getMonth() + 1).padStart(2, '0');
-  const day = String(parsedDate.getDate()).padStart(2, '0');
-  
-  return `${month}/${day}/${year}`;
-}
-
-/**
- * Formats a date in MM/DD/YYYY HH:mm:ss format
- * @param {Date|number|string} [date] - Date object, timestamp, or date string (defaults to current date)
- * @returns {string} - Formatted date string in MM/DD/YYYY HH:mm:ss format
- */
-function formatUSFull(date) {
-  const parsedDate = validateDate(date);
-  
-  const datePart = formatUS(parsedDate);
-  const hours = String(parsedDate.getHours()).padStart(2, '0');
-  const minutes = String(parsedDate.getMinutes()).padStart(2, '0');
-  const seconds = String(parsedDate.getSeconds()).padStart(2, '0');
-  
-  return `${datePart} ${hours}:${minutes}:${seconds}`;
-}
-
-/**
- * Format a date according to the specified locale and time inclusion
- * @param {Date|number|string} [date] - Date object, timestamp, or date string (defaults to current date)
- * @param {string} [locale=FORMAT_TYPES.ES] - Locale code (FORMAT_TYPES.ES or FORMAT_TYPES.EN)
- * @param {boolean} [includeTime=false] - Whether to include time in the output
- * @returns {string} - Formatted date string based on locale and time inclusion
- * @throws {Error} - If the locale is invalid
- */
-function formatWithLocale(date, locale = FORMAT_TYPES.ES, includeTime = false) {
-  const parsedDate = validateDate(date);
-  
-  // Validate locale
-  if (locale !== FORMAT_TYPES.ES && locale !== FORMAT_TYPES.EN) {
-    throw new Error(`Invalid locale: ${locale}. Must be either '${FORMAT_TYPES.ES}' or '${FORMAT_TYPES.EN}'.`);
-  }
-  
-  if (locale === FORMAT_TYPES.ES) {
-    return includeTime ? formatFull(parsedDate) : formatSimple(parsedDate);
-  } else {
-    return includeTime ? formatUSFull(parsedDate) : formatUS(parsedDate);
+  // Format using toLocaleString or toLocaleDateString based on whether time is included
+  try {
+    return includeTime 
+      ? parsedDate.toLocaleString(locale, formatOptions)
+      : parsedDate.toLocaleDateString(locale, formatOptions);
+  } catch (error) {
+    // Handle invalid locale or other formatting errors
+    console.error(`Error formatting date: ${error.message}. Using default locale.`);
+    return includeTime 
+      ? parsedDate.toLocaleString('en', formatOptions)
+      : parsedDate.toLocaleDateString('en', formatOptions);
   }
 }
 
+/**
+ * Format a date using a specific locale and style
+ * @param {Date|number|string} [date=new Date()] - Date object, timestamp, or date string
+ * @param {string} [locale='en'] - Locale code (e.g., 'en', 'es', 'fr')
+ * @param {string} [style='simple'] - Format style: 'simple', 'long', or 'full'
+ * @returns {string} - Formatted date string without time
+ */
+function formatDate(date = new Date(), locale = 'en', style = 'simple') {
+  return format(date, locale, { includeTime: false, style });
+}
+
+/**
+ * Format a date with time using a specific locale and style
+ * @param {Date|number|string} [date=new Date()] - Date object, timestamp, or date string
+ * @param {string} [locale='en'] - Locale code (e.g., 'en', 'es', 'fr')
+ * @param {string} [style='simple'] - Format style: 'simple' or 'full'
+ * @returns {string} - Formatted date string with time
+ */
+function formatDateTime(date = new Date(), locale = 'en', style = 'simple') {
+  return format(date, locale, { includeTime: true, style });
+}
+
+/**
+ * Format a date with the long style (month name and no weekday)
+ * @param {Date|number|string} [date=new Date()] - Date object, timestamp, or date string
+ * @param {string} [locale='en'] - Locale code
+ * @returns {string} - Formatted date with month name
+ */
+function formatLong(date = new Date(), locale = 'en') {
+  return formatDate(date, locale, 'long');
+}
+
+/**
+ * Format a date with the full style (weekday and month name)
+ * @param {Date|number|string} [date=new Date()] - Date object, timestamp, or date string
+ * @param {string} [locale='en'] - Locale code
+ * @returns {string} - Formatted date with weekday and month name
+ */
+function formatFull(date = new Date(), locale = 'en') {
+  return formatDate(date, locale, 'full');
+}
+
+/**
+ * Format a date with time using the full style
+ * @param {Date|number|string} [date=new Date()] - Date object, timestamp, or date string
+ * @param {string} [locale='en'] - Locale code
+ * @returns {string} - Formatted date and time with weekday and month name
+ */
+function formatFullDateTime(date = new Date(), locale = 'en') {
+  return formatDateTime(date, locale, 'full');
+}
+// Export all functions
 module.exports = {
-  formatSimple,
+  // Core function
+  format,
+  
+  // Helper functions
+  formatDate,
+  formatDateTime,
+  formatLong,
   formatFull,
-  formatUS,
-  formatUSFull,
-  formatWithLocale,
-  FORMAT_TYPES
+  formatFullDateTime
 };
